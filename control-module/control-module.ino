@@ -1,4 +1,5 @@
 #define NUM_SPARKMAX 8
+#define SERIAL_COMMANDS_DEBUG
 
 #define sign(x) ((x) < 0 ? -1 : ((x) > 0 ? 1 : 0))
 
@@ -99,7 +100,7 @@ void cmd_set_speed(SerialCommands* sender) {
 SerialCommand cmd_get_device_name_("get_device_name", cmd_get_device_name);
 SerialCommand cmd_read_encoder_("read_encoder", cmd_read_encoder);
 SerialCommand cmd_get_set_speed_("set_speed", cmd_set_speed);
-
+  
 void setup() {
   // 115200 baudrate
   Serial.begin(115200);
@@ -109,8 +110,10 @@ void setup() {
   serial_commands_.AddCommand(&cmd_get_device_name_);
   serial_commands_.AddCommand(&cmd_read_encoder_);
   serial_commands_.AddCommand(&cmd_get_set_speed_);
+
+  Serial.println("Ready");
 }
 
 void loop() {
-  serial_commands_.ReadSerial();
+   serial_commands_.ReadSerial();
 }
