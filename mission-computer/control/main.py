@@ -1,5 +1,6 @@
 import serial
 import time
+import sys
 
 class CommunicationsModule:
 
@@ -21,7 +22,10 @@ class CommunicationsModule:
     def _write_cmd(self, message):
         self.ser.write(bytes(f'{message}\r\n', 'utf-8'))
 
-cm = CommunicationsModule(port='COM14')
+port = None
+if len(sys.argv) > 1:
+    port = sys.argv[1]
+cm = CommunicationsModule(port)
 
 print(cm.get_device_name())
 
